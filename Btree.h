@@ -1,10 +1,3 @@
-/*
-
-IMPORTANT: Sample B-tree functions are from the book Data Structures using C++ by D.S. Malik
-
-*/
-
-
 #ifndef H_Btree
 #define H_Btree
 

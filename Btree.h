@@ -21,8 +21,8 @@ public:
 	};
 	bool search(const int& searchItem);
 	void insert(const int& insertItem);
-	void inOrder(ofstream& ofs);
-	void printLevel(ofstream& ofs, int level);
+	void inOrder();
+	void printLevel(int level);
 	Btree() {}
 	Btree(int order) { BtreeOrder = order; root = nullptr; }
 protected:
@@ -33,8 +33,8 @@ private:
 	void insertBtree(BtreeNode *current, const int &insertItem, int &median, BtreeNode* &rightChild, bool &isTaller, bool& found);
 	void insertNode(BtreeNode *current, const int& insertItem, BtreeNode* &rightChild, int insertPosition);
 	void splitNode(BtreeNode *current, const int& insertItem, BtreeNode* rightChild, int insertPosition, BtreeNode* &rightNode, int &median);
-	void recInorder(BtreeNode *current, ofstream& ofs);
-	void recPrintLevel(BtreeNode* current, ofstream& ofs, int level, bool& exists);
+	void recInorder(BtreeNode *current);
+	void recPrintLevel(BtreeNode* current, int level, bool& exists);
 };
 
 bool Btree::search(const int& searchItem)
@@ -206,37 +206,37 @@ void Btree::splitNode
 	}
 } 
 
-void Btree::inOrder(ofstream& ofs)
+void Btree::inOrder()
 {
-	recInorder(root, ofs);
+	recInorder(root);
 } 
 
 
-void Btree::recInorder(BtreeNode *current, ofstream& ofs)
+void Btree::recInorder(BtreeNode *current)
 {
 	if (current != nullptr)
 	{
-		recInorder(current->children[0], ofs);
+		recInorder(current->children[0]);
 
 		for (int i = 0; i < current->recCount; i++)
 		{
-			ofs << current->list[i] << " ";
+			cout << current->list[i] << " ";
 
-			recInorder(current->children[i + 1], ofs);
+			recInorder(current->children[i + 1] );
 		}
 	}
 } 
 
-void Btree::printLevel(ofstream& ofs, int level)
+void Btree::printLevel(int level)
 {
 	bool exists = false;
 	int count = 0;
-	recPrintLevel(root, ofs, level, exists);
+	recPrintLevel(root, level, exists);
 	if (!exists)
-		ofs << "empty";
+		cout << "empty";
 }
 
-void Btree::recPrintLevel(BtreeNode* current, ofstream& ofs, int level, bool& exists) // Currently prints only the first level
+void Btree::recPrintLevel(BtreeNode* current, int level, bool& exists) // Currently prints only the first level
 {
 	if (current == nullptr)
 		return;
@@ -244,14 +244,14 @@ void Btree::recPrintLevel(BtreeNode* current, ofstream& ofs, int level, bool& ex
 	{
 		for (int i = 0; i < current->recCount; i++)
 		{
-			ofs << current->list[i] << " ";
+			cout << current->list[i] << " ";
 			exists = true;
 		}
 	}
 	else if (level > 1)
 	{
 		for (int i = 0; i < ((current->recCount)+1); i++) 
-			recPrintLevel(current->children[i], ofs, level - 1, exists);
+			recPrintLevel(current->children[i], level - 1, exists);
 	}
 }
 

@@ -9,6 +9,7 @@ using namespace std;
 
 static int BtreeOrder;
 
+//template<class T>
 class Btree
 {
 public:
@@ -16,7 +17,7 @@ public:
 	{
 	public:
 		int recCount;
-		int* list = new int[BtreeOrder - 1];
+		int* list = new int[BtreeOrder - 1]; // Change to template for use with any data type T* list = new int[BtreeOrder - 1];
 		BtreeNode **children = new BtreeNode*[BtreeOrder];
 	};
 	bool search(const int& searchItem);

@@ -17,7 +17,7 @@ public:
 	{
 	public:
 		int recCount;
-		int* list = new int[BtreeOrder - 1]; // Change to template for use with any data type T* list = new int[BtreeOrder - 1];
+		int* list = new int[BtreeOrder - 1]; // Change to template for use with any data type: T* list = new T[BtreeOrder - 1];
 		BtreeNode **children = new BtreeNode*[BtreeOrder];
 	};
 	bool search(const int& searchItem);

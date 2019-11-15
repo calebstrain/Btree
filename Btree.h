@@ -24,7 +24,7 @@ public:
 	void insert(const int& insertItem);
 	void inOrder();
 	void printLevel(int level);
-	Btree() {}
+	Btree() { BtreeOrder = 3; root = nullptr; } // by defualt the order of the tree is 3
 	Btree(int order) { BtreeOrder = order; root = nullptr; }
 protected:
 	BtreeNode *root;

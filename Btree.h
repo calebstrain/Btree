@@ -9,12 +9,12 @@ using namespace std;
 
 static int BtreeOrder;
 
-//template<class T>
+template<class T>
 class Btree
 {
 public:
-	bool search(const int& searchItem);
-	void insert(const int& insertItem);
+	bool search(const T& searchItem);
+	void insert(const T& insertItem);
 	void inOrder();
 	void printLevel(int level);
 	Btree() { BtreeOrder = 3; root = nullptr; } // by default the order of the tree is 3
@@ -26,18 +26,18 @@ private:
 	struct BtreeNode
 	{
 		int recCount;
-		int* list = new int[BtreeOrder - 1]; // Change to template for use with any data type: T* list = new T[BtreeOrder - 1];
-		BtreeNode **children = new BtreeNode*[BtreeOrder];
+		T* list = new T[BtreeOrder - 1]; 
+		BtreeNode** children = new BtreeNode*[BtreeOrder];
 	};
-	void searchNode(BtreeNode *current, const int& item, bool& found, int& location);
-	void insertBtree(BtreeNode *current, const int &insertItem, int &median, BtreeNode* &rightChild, bool &isTaller, bool& found);
-	void insertNode(BtreeNode *current, const int& insertItem, BtreeNode* &rightChild, int insertPosition);
-	void splitNode(BtreeNode *current, const int& insertItem, BtreeNode* rightChild, int insertPosition, BtreeNode* &rightNode, int &median);
-	void recInorder(BtreeNode *current);
+	void searchNode(BtreeNode* current, const T& item, bool& found, int& location);
+	void insertBtree(BtreeNode* current, const T& insertItem, int& median, BtreeNode*& rightChild, bool &isTaller, bool& found);
+	void insertNode(BtreeNode* current, const T& insertItem, BtreeNode*& rightChild, int insertPosition);
+	void splitNode(BtreeNode* current, const T& insertItem, BtreeNode* rightChild, int insertPosition, BtreeNode*& rightNode, int& median);
+	void recInorder(BtreeNode* current);
 	void recPrintLevel(BtreeNode* current, int level, bool& exists);
 };
 
-bool Btree::search(const int& searchItem)
+bool Btree::search(const T& searchItem)
 {
 	bool found = false;
 	int location;
@@ -55,11 +55,11 @@ bool Btree::search(const int& searchItem)
 	}
 
 	return found;
-} //end search
+}
 
 
 void Btree::searchNode
-(BtreeNode *current, const int& item, bool& found, int& location) // Change to binary search
+(BtreeNode *current, const T& item, bool& found, int& location)
 {
 	location = 0;
 	while (location < current->recCount
@@ -73,7 +73,7 @@ void Btree::searchNode
 		found = false;
 } //end searchNode
 
-void Btree::insert(const int& insertItem)
+void Btree::insert(const T& insertItem)
 {
 	bool isTaller = false;
 	int median;
@@ -95,10 +95,10 @@ void Btree::insert(const int& insertItem)
 
 		root = tempRoot;
 	}
-} //insert
+} 
 
 
-void Btree::insertBtree(BtreeNode *current, const int &insertItem, int &median, BtreeNode* &rightChild, bool &isTaller, bool& found)
+void Btree::insertBtree(BtreeNode* current, const T& insertItem, int& median, BtreeNode*& rightChild, bool& isTaller, bool& found)
 {
 	isTaller = false;
 	int location;
@@ -132,7 +132,7 @@ void Btree::insertBtree(BtreeNode *current, const int &insertItem, int &median, 
 
 
 void Btree::insertNode
-(BtreeNode *current, const int& insertItem, BtreeNode* &rightChild, int insertPosition)
+(BtreeNode* current, const T& insertItem, BtreeNode*& rightChild, int insertPosition)
 {
 	int index;
 
@@ -149,7 +149,7 @@ void Btree::insertNode
 } 
 
 void Btree::splitNode
-(BtreeNode *current, const int& insertItem, BtreeNode* rightChild, int insertPosition, BtreeNode* &rightNode, int &median)
+(BtreeNode* current, const T& insertItem, BtreeNode* rightChild, int insertPosition, BtreeNode*& rightNode, int& median)
 {
 	rightNode = new BtreeNode;
 
@@ -212,7 +212,7 @@ void Btree::inOrder()
 } 
 
 
-void Btree::recInorder(BtreeNode *current)
+void Btree::recInorder(BtreeNode* current)
 {
 	if (current != nullptr)
 	{

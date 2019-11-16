@@ -30,7 +30,6 @@ public:
 	void insert(const T& insertItem);
 	void inOrder();
 	void printLevel(int level);
-	Btree() { BtreeOrder = 3; root = nullptr; } // by default the order of the tree is 3
 	Btree(int order) { BtreeOrder = order; root = nullptr; }
 protected:
 	BtreeNode* root;

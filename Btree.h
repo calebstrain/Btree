@@ -13,13 +13,6 @@ static int BtreeOrder;
 class Btree
 {
 public:
-	class BtreeNode
-	{
-	public:
-		int recCount;
-		int* list = new int[BtreeOrder - 1]; // Change to template for use with any data type: T* list = new T[BtreeOrder - 1];
-		BtreeNode **children = new BtreeNode*[BtreeOrder];
-	};
 	bool search(const int& searchItem);
 	void insert(const int& insertItem);
 	void inOrder();
@@ -30,6 +23,12 @@ protected:
 	BtreeNode *root;
 
 private:
+	struct BtreeNode
+	{
+		int recCount;
+		int* list = new int[BtreeOrder - 1]; // Change to template for use with any data type: T* list = new T[BtreeOrder - 1];
+		BtreeNode **children = new BtreeNode*[BtreeOrder];
+	};
 	void searchNode(BtreeNode *current, const int& item, bool& found, int& location);
 	void insertBtree(BtreeNode *current, const int &insertItem, int &median, BtreeNode* &rightChild, bool &isTaller, bool& found);
 	void insertNode(BtreeNode *current, const int& insertItem, BtreeNode* &rightChild, int insertPosition);

@@ -25,7 +25,6 @@ private:
 	void splitNode(BtreeNode* current, const T& insertItem, BtreeNode* rightChild, int insertPosition, BtreeNode*& rightNode, int& median);
 	void recInorder(BtreeNode* current);
 	void recPrintLevel(BtreeNode* current, int level, bool& exists);
-
 public:
 	bool search(const T& searchItem);
 	void insert(const T& insertItem);

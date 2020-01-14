@@ -1,6 +1,6 @@
 # Btree
 
-Btree class, includes the following functions
+Btree class made for Data Structures Class, includes the following functions
 * Define the order of the tree in the constructor
 * Search
 *	Insert
